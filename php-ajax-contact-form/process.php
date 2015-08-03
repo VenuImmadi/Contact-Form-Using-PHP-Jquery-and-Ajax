@@ -1,5 +1,10 @@
 <?php 
+// Creating a empty variables 
+$email = '';
+$name = '';
+$message = '';
 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 // process.php
 
@@ -56,20 +61,21 @@ $headers = 'From: '.$email_from."\r\n".
  
 'X-Mailer: PHP/' . phpversion();
 
- if (empty($errors)) {
-if(@mail($email_to, $email_subject, $email_message, $headers)){
-     $data['success'] = 'sent';
-	echo json_encode($data);
-}
-
-}else{
+	if (empty($errors)) {
+		if(@mail($email_to, $email_subject, $email_message, $headers)){
+			$data['success'] = 'sent';
+			echo json_encode($data);
+		}
+	
+	}else{
 	
 	
 	//echo $errors;
-	 echo json_encode($errors);
-
+	echo json_encode($errors);
+	
 	}
 
+}
 
     
 ?>
